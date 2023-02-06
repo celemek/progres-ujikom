@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="animated.txt" />
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back">
+        <div class="back-kedua">
+            <nav>
+                <!-- logo -->
+                <img src="" class="gambar">
+                <div class="header">
+                    <h1 class="animate__animated animate__backInDown judul-besar">PEDULI DIRI</h1>
+                    <h3 class="animate__animated animate__rotateInUpLeft judul-kecil">CATATAN PERJALANAN</h3>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="navigasi">
+        <div id="button" onclick="pindah('satu')" class="home">HOME</div>
+        <div id="button" onclick="pindah('dua')" class="catatan">CATATAN PERJALANAN</div>
+        <div id="button" onclick="pindah('tiga')" class="isi-perjalanan">ISI DATA</div>
+    </div><br>
+
+    <div class="conten">
+        <div class="conten-dua">
+            <div class="item-id home-isi">
+            <div>
+                    <div class="out">
+                        <p>SELAMAT DATANG DI WEBSITE PEDULI DIRI</p>
+                    </div>
+                    <div class="tombol">
+                        <button class="btn">ISI CATATAN</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item-id catatan">
+            <div>
+                    <div class="out-catat">
+                        <div class="urut">
+                            <span>Urutkan Berdasarkan</span>
+                            <select>
+                                <option>tanggal</option>
+                                <option>waktu</option>
+                                <option>lokasi</option>
+                                <option>suhu</option>
+                            </select>
+                            <button class="btn-catat"> Urutkan</button>
+                        </div>
+                    </div><br>
+                    <div class="out-catat">
+                        <div class="tab">
+                            <table border="1" class="tabel" cellpadding="10px" cellspacing="0">
+                                <tr>
+                                    <th>tanggal</th>
+                                    <th>waktu</th>
+                                    <th>lokasi</th>
+                                    <th>suhu</th>
+                                </tr>
+                                <tr>
+                                    <td>contoh</td>
+                                    <td>contoh</td>
+                                    <td>contoh</td>
+                                    <td>contoh</td>
+                                </tr>
+                            </table>
+                            <div class="tombol">
+                                <button class="btn">ISI CATATAN</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item-id isi-data">
+            <div >
+                    <div class="isi">
+                        <form class="form" action="">
+                            <div id="form">
+                                <div class="isi-form">
+                                    <span>TANGGAL</span>
+                                    <input type="date" class="in">
+                                </div>
+                                <div class="isi-form">
+                                    <span>TANGGAL</span>
+                                    <input type="date" class="in">
+                                </div>
+                                <div class="isi-form">
+                                    <span>TANGGAL</span>
+                                    <input type="date" class="in">
+                                </div>
+                            </div>
+
+                            <div class="tubm">
+                                <input type="submit" class="submit" value="Simpan">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+
+</body>
+<script>
+    function pindah(param) {
+        const manu = document.querySelectorAll(".item-id");
+        console.log(manu);
+        console.log(param);
+
+        if(param === "satu"){
+            manu.forEach((elemen, index)=>{
+                if(index != 0){
+                    elemen.classList.add("hidden");
+                }else{
+                    elemen.classList.remove("hidden");
+                }
+            });
+        }else if(param === "dua"){
+            manu.forEach((elemen, index)=>{
+                if(index != 1){
+                    elemen.classList.add("hidden");
+                }else{
+                    elemen.classList.remove("hidden");
+                }
+            });
+        }else {
+            manu.forEach((elemen, index)=>{
+                if(index != 2){
+                    elemen.classList.add("hidden");
+
+                }else{
+                    elemen.classList.remove("hidden");
+
+                }
+            });
+        }
+    }
+
+    function getNamaLengkap(){
+        const nama = localStorage.getItem("isiNamaLengkap");
+        if (nama){
+        document.getElementById("Nama_Lengkap").innerHTML = nama ;
+        }
+    }
+</script>
+<style>
+    .isi-data {
+        width: 100%;
+        height: 200px;
+    }
+
+    .isi {
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .isi-form {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    #form {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+
+    .tubm {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        align-items: center;
+        margin-right: 20px;
+    }
+</style>
+<style>
+    .catatan {
+        width: 100%;
+        height: 100%;
+    }
+
+    .urut {
+        border: 1px solid black;
+        padding: 10px;
+    }
+
+    .tab {
+        padding: 10px;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .tabel {
+        width: 100%;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background-color: bisque;
+    }
+</style>
+<style>
+    .conten {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+
+    .conten-dua {
+        width: 60vw;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10vh;
+    }
+
+    .home-isi {
+        width: 100%;
+        height: 200px;
+        margin-top: 10vh;
+    }
+
+    .out {
+        border: 1px solid black;
+        height: 100px;
+        padding: 10px;
+    }
+
+    .tombol {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+</style>
+
+<style>
+    * {
+        margin: 0;
+    }
+
+    nav {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .back {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        max-width: 100%;
+        background-color: aqua;
+    }
+
+    .animate__backInDown {
+        animation-duration: 3s;
+        font-size: 2.5rem;
+    }
+
+    .gambar {
+        border: 1px solid white;
+        height: 10vh;
+        width: 10vw;
+        margin: 10px;
+    }
+
+    .judul-kecil {
+        font-size: 1.5rem;
+        animation-duration: 1s;
+    }
+
+    .navigasi {
+        display: flex;
+        justify-content: space-around;
+        border: 1px solid black;
+        background-color: cornsilk;
+        text-align: center;
+    }
+
+    #button {
+        padding: 10px;
+        cursor: pointer;
+        /* height: 20px; */
+        width: 100%;
+    }
+
+    #button:first-child {
+        border-right: 1px solid black;
+    }
+
+    #button:last-child {
+        border-left: 1px solid black;
+    }
+</style>
+
+</html>

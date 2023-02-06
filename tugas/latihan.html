@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="back">
+        <div class="a">
+            <div id="ba">
+                <form id="login">
+                    <input type="number" id="in" accept="none" placeholder="NIK"><br>
+                    <input type="text" class="in" id="nama" accept="none" placeholder="NAMA"><br>
+                    <div class="button">
+                        <div class="tombol">
+                            <button id="log" class="" onclick="handl(event, 'masuk')"> LOGIN </button><br><br>
+                            <a href="" id="link" onclick="handl(event, 'daftar')">Belum Punya Akun?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        async function handl(event, aksi) {
+            event.preventDefault();
+            console.log(aksi);
+
+            const nik = document.getElementById("in").value;
+            const nama = document.getElementById("nama").value;
+
+            let formData = new FormData();
+            formData.append("nik", nik);
+            formData.append("nama", nama);
+
+
+            if (aksi === "daftar") {
+                formData.append("aksi", "daftar");
+            } else {
+                formData.append("aksi", "login");
+            }
+
+            let object = {};
+            formData.forEach((value, key) => (object[key] = value));
+            let json = JSON.stringify(object);
+            console.log(json);
+            if (aksi === "daftar") {
+                try {
+
+                    const response = await fetch("http://localhost:8888", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: json,
+                    });
+                    let data = await response;
+                    if(data.status === "berhasil tersimpan"){
+                        alert("berhasil tersimpan");
+                        localStorage.setItem("isLoggedIn", "admin");
+                        window.location.replace("login.html");
+                    }
+                } catch (error) {
+                    console.log(error);
+
+                }
+
+            }else{
+                try {
+                    console.log(json);
+                    const response = await fetch('http://localhost:8888', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: json,
+                    });
+                    let data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+<style>
+    * {
+        margin: 0;
+        font-family: Font By Ael;
+    }
+
+    .back {
+        background-color: rgb(171, 173, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    #login {
+        position: absolute;
+    }
+
+    #ba {
+        border-radius: 20px 20px 20px 0px;
+        height: 30vh;
+        width: 20vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: scale(2);
+        background-color: rgb(255, 253, 119);
+    }
+
+    .in {
+        margin-top: 10px;
+    }
+
+    #in,
+    .in {
+        padding: 2px;
+    }
+
+    .tombol {
+        text-align: center;
+    }
+
+    #log {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #link {
+        text-decoration: none;
+    }
+
+    #link:hover {
+        text-decoration: underline;
+    }
+</style>
